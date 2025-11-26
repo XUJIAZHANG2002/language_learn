@@ -49,9 +49,11 @@ class OmDetObjectDetector:
         )[0]
 
         detections = []
-        for score, label, box in zip(results["scores"], results["labels"], results["boxes"]):
+        for score, label_idx, box in zip(results["scores"], results["labels"], results["boxes"]):
+            idx = int(label_idx)
+            label_text = text_labels[idx]
             detections.append({
-                "label": label,
+                "label": label_text,
                 "score": float(score),
                 "box": box.tolist()
             })
