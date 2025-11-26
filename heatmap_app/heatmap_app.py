@@ -2,8 +2,7 @@ import numpy as np
 import time
 import matplotlib.pyplot as plt
 
-from vision_models.object_detector import OmDetObjectDetector
-from vision_models.box_visualizer import BoxVisualizer
+
 
 
 class HeatmapApp:
@@ -12,14 +11,14 @@ class HeatmapApp:
     Object detection runs every 2 seconds.
     """
 
-    def __init__(self, image_canvas, tracker, heatmap):
+    def __init__(self, image_canvas, tracker, heatmap, object_detector, box_visualizer):
         self.canvas = image_canvas
         self.tracker = tracker
         self.heatmap = heatmap
 
         # New components
-        self.detector = OmDetObjectDetector()
-        self.visualizer = BoxVisualizer()
+        self.detector = object_detector
+        self.visualizer = box_visualizer
 
         # Store latest detections
         self.detections = []
