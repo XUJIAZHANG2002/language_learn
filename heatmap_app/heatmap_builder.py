@@ -6,7 +6,10 @@ from language_learn.vision_models.object_detector import OmDetObjectDetector
 from language_learn.vision_models.box_visualizer import BoxVisualizer
 from language_learn.speech.speaker import GTTSSpeaker
 from language_learn.translator.translator import Translator
-
+from language_learn.translator.german_translator import GermanTranslator
+from language_learn.translator.french_translator import FrenchTranslator
+from language_learn.speech.german_speaker import GermanSpeaker
+from language_learn.speech.french_speaker import FrenchSpeaker
 from language_learn.heatmap_app.heatmap_app import HeatmapApp
 
 
@@ -64,6 +67,16 @@ class HeatmapAppBuilder:
         self.text_labels = text_labels
         return self
 
+    def with_language(self, lang="de"):
+        if lang == "de":
+            self.translator = GermanTranslator()
+            self.speaker = GermanSpeaker()
+        elif lang == "fr":
+            self.translator = FrenchTranslator()
+            self.speaker = FrenchSpeaker()
+        else:
+            raise ValueError("Unsupported language")
+        return self
 
 
     def with_text_labels_file(self, filepath):

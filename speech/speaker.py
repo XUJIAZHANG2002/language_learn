@@ -54,10 +54,3 @@ class GTTSSpeaker:
         time.sleep(0.05)
 
 
-
-# sp = GTTSSpeaker(lang="de")
-# sp.speak("Hallo")
-# sp.speak("Guten Tag")
-# sp.speak("Stuhl")
-# time.sleep(8)   # enough time to play all three
-# sp.stop()
