@@ -1,3 +1,12 @@
+"""
+HeatmapApp: main controller of the system.
+
+Coordinates:
+- mouse heatmap tracking
+- periodic object detection
+- event triggering (via EventBus)
+- visualization and UI update
+"""
 
 import numpy as np
 import time

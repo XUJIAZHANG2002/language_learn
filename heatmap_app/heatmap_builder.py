@@ -1,3 +1,11 @@
+"""
+HeatmapAppBuilder: constructs HeatmapApp using Builder pattern.
+
+Provides a flexible way to configure components (detector, heatmap,
+translator, speaker, etc.) and inject them into the main application.
+"""
+
+
 from language_learn.event.event_bus import EventBus
 from language_learn.heatmap_app.heatmap_generator import HeatmapGenerator
 from language_learn.heatmap_app.mouse_tracker import MouseTracker
@@ -35,6 +43,7 @@ class HeatmapAppBuilder:
         return self
 
     def with_object_detector(self, kind="omdet"):
+         # simple factory behavior for detector selection
         if kind == "omdet":
             self.detector = OmDetObjectDetector()
         else:

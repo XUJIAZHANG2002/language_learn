@@ -1,3 +1,9 @@
+"""
+EventBus: a singleton publish-subscribe system for decoupled communication
+between components (e.g., detector, heatmap, speaker).
+"""
+
+
 class EventBus:
     _instance = None
 # singleton pattern

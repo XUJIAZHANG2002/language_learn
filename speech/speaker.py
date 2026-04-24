@@ -1,3 +1,11 @@
+"""
+GTTSSpeaker: asynchronous text-to-speech using gTTS.
+
+Uses a background thread + queue to avoid blocking the main application
+(e.g., UI / detection loop) while generating and playing audio.
+"""
+
+
 import threading
 import queue
 import time
@@ -28,6 +36,7 @@ class GTTSSpeaker:
             self.q.put(text)
 
     def _worker(self):
+        # continuously process queued speech requests
         while self.running:
             try:
                 text = self.q.get(timeout=0.1)
@@ -42,6 +51,7 @@ class GTTSSpeaker:
                 print("[speaker] saved mp3:", tmp_path)
 
                 try:
+                     # blocking playback (but safe since it's in worker thread)
                     print("[speaker] start playing...")
                     playsound(tmp_path)
                     print("[speaker] play finished")
