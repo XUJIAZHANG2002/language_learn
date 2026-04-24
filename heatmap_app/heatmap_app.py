@@ -115,8 +115,12 @@ class HeatmapApp:
 
 
     def _update_cursor_and_heatmap(self):
-        x = int(self.tracker.x / self.canvas.W * self.canvas.W)
-        y = int(self.tracker.y / self.canvas.H * self.canvas.H)
+        screen_w = 2560
+        screen_h = 1600
+
+        x = int(self.tracker.x * self.canvas.W / screen_w)
+        y = int(self.tracker.y * self.canvas.H / screen_h)
+
         x = np.clip(x, 0, self.canvas.W - 1)
         y = np.clip(y, 0, self.canvas.H - 1)
 

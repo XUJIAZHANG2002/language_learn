@@ -11,7 +11,7 @@ class OmDetObjectDetector:
 
     def __init__(self, model_id="omlab/omdet-turbo-swin-tiny-hf", device=None):
         self.model_id = model_id
-        self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
+        self.device = "cpu"
         
         # Load processor + model
         self.processor = AutoProcessor.from_pretrained(model_id)

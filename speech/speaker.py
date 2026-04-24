@@ -31,23 +31,29 @@ class GTTSSpeaker:
         while self.running:
             try:
                 text = self.q.get(timeout=0.1)
+                print("[speaker] got text:", repr(text))
 
-                # 1) synthesize to a temp mp3
                 with NamedTemporaryFile(delete=False, suffix=".mp3") as f:
+                    print("[speaker] generating mp3...")
                     tts = gTTS(text=text, lang=self.lang)
                     tts.write_to_fp(f)
                     tmp_path = f.name
 
-                # 2) play it (blocking in this worker thread only)
+                print("[speaker] saved mp3:", tmp_path)
+
                 try:
+                    print("[speaker] start playing...")
                     playsound(tmp_path)
+                    print("[speaker] play finished")
                 finally:
-                    # 3) clean up
                     if os.path.exists(tmp_path):
                         os.remove(tmp_path)
+                        print("[speaker] temp deleted")
 
             except queue.Empty:
-                pass  # nothing to say right now
+                pass
+            except Exception as e:
+                print("[speaker] ERROR:", e)
 
     def stop(self):
         self.running = False
